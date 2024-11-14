@@ -1,7 +1,6 @@
 # Cordova Permit iOS getUserMedia Plugin
 
-A Cordova plugin allowing the embedded web app (loaded from a file inside the
-app bundle) to call
+A Cordova plugin allowing the embedded web app to call
 [`navigator.mediaDevices.getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
 (part of browser WebRTC support) and show a camera view without triggering a new
 iOS permission dialog every time.
@@ -21,11 +20,7 @@ on the `WKWebView`. Whenever the JS code in the web view calls
 `navigator.mediaDevices.getUserMedia`, the web view asks the delegate for a
 “permission decision” by sending it a
 [`webView:requestMediaCapturePermissionForOrigin:initiatedByFrame:type:decisionHandler:`](https://developer.apple.com/documentation/webkit/wkuidelegate/3763087-webview?language=objc)
-message. The plugin checks the protocol of the origin, and if it’s `file` then
-it makes an “allow” decision, which suppresses the permission dialog. For all
-other origins it makes the default “prompt” decision, so if you’re running
-`getUserMedia` from web pages loaded from outside the app, they will continue to
-prompt for permission. If you need to allow that, feel free to fork this plugin.
+message. It responds with an “allow” decision, which suppresses the permission dialog.
 
 Note that all other `WKUIDelegate` messages are forwarded to the original
 delegate that was in place when this plugin is loaded, so the other functions of

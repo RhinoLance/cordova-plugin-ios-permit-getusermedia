@@ -28,12 +28,7 @@
                                       type: (WKMediaCaptureType) type
                            decisionHandler: (void (^)(WKPermissionDecision decision)) decisionHandler
 {
-    if ([origin.protocol isEqualToString:@"file"]) {
-        NSLog(@"Supressing media permission request for file origin");
-        decisionHandler(WKPermissionDecisionGrant);
-    } else {
-        decisionHandler(WKPermissionDecisionPrompt);
-    }
+    decisionHandler(WKPermissionDecisionGrant);
 }
 
 - (void)
